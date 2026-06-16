@@ -43,7 +43,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t rev_dt[32]={0};
+int indexx = -1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -52,6 +53,7 @@ static void MX_GPIO_Init(void);
 void uart_init(void);
 void transmit_1char(char data);
 void transmit_string(char* data);
+uint8_t recive_char(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -96,11 +98,12 @@ int main(void)
   uart_init();
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
     /* USER CODE END WHILE */
-	  transmit_string("Helloworld\r\n");
-	      HAL_Delay(1000);
+	  rev_dt[++indexx]  = recive_char();
+	  transmit_1char(rev_dt[indexx]);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -132,6 +135,11 @@ void transmit_string(char* data)
 	{
 		transmit_1char(data[i]);
 	}
+}
+uint8_t recive_char()
+{
+    while (!(USART2->SR & USART_SR_RXNE)){}
+    return (uint8_t)(USART2->DR & 0xFF);
 }
 /**
   * @brief System Clock Configuration
