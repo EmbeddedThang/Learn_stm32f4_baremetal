@@ -101,9 +101,6 @@ int main(void)
 
   while (1)
   {
-    /* USER CODE END WHILE */
-	  rev_dt[++indexx]  = recive_char();
-	  transmit_1char(rev_dt[indexx]);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -120,6 +117,14 @@ void uart_init()
 	USART2->BRR = (104<<4)|3;
 	USART2->CR1 &=~(USART_CR1_M|USART_CR1_PCE);
 	USART2->CR1 |= (USART_CR1_TE|USART_CR1_RE|USART_CR1_UE);
+	//enable interrupt uart2 recive
+	USART2->CR1 |= (USART_CR1_RXNEIE);
+	NVIC->ISER[1] |= (1<<(38-32));
+}
+void USART2_IRQHandler()
+{
+	rev_dt[++indexx]  = (uint8_t)(USART2->DR & 0xFF);
+	transmit_1char(rev_dt[indexx]);
 }
 void transmit_1char(char data)
 {
