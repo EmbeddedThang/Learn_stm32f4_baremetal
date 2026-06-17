@@ -1,0 +1,10 @@
+../Core/Src/main.c:70:5:main	1
+../Core/Src/main.c:110:6:uart_init	1
+../Core/Src/main.c:125:6:dma_uart1_init	1
+../Core/Src/main.c:140:6:DMA1_Stream5_IRQHandler	3
+../Core/Src/main.c:157:6:transmit_1char	3
+../Core/Src/main.c:164:6:transmit_string	2
+../Core/Src/main.c:172:9:recive_char	2
+../Core/Src/main.c:181:6:SystemClock_Config	3
+../Core/Src/main.c:223:13:MX_GPIO_Init	1
+../Core/Src/main.c:245:6:Error_Handler	1
