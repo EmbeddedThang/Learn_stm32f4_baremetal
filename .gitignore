@@ -2,3 +2,10 @@
 Debug/
 Release/
 *.log
+*.elf
+*.bin
+*.hex
+*.o
+*.d
+*.map
+*.list
